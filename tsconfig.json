@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    // for import getReactNativePersistance more at:
+    // https://stackoverflow.com/questions/76914913/cannot-import-getreactnativepersistence-in-firebase10-1-0
+    "paths": {
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
+    },
+    // following config for importing React from 'react' using ecmaScript, more at:
+    // https://stackoverflow.com/questions/60551025/how-can-i-get-rid-of-my-types-react-index-can-only-be-default-imported-using
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
+  }
+}
