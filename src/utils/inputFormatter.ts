@@ -7,7 +7,7 @@ const handleInput = async (input: string) => {
   if (input.length > 0) {
     const [, type, personName, amount] = input.trim().split(".");
     const validAmount = Number(amount);
-    if (!validAmount) {
+    if (validAmount) {
       const newMM = {
         id: auth.currentUser.uid,
         timestamp: serverTimestamp(),

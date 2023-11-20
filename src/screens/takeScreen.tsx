@@ -1,4 +1,12 @@
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Dimensions,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  useColorScheme,
+} from "react-native";
 import { styles } from "../styles/styles";
 import React, { useEffect, useState } from "react";
 import {
@@ -13,11 +21,13 @@ import { auth, mmCollection } from "../firebase/firebase";
 import NoTransactions from "../components/noTransactions";
 
 import { Mind } from "../types/types";
+import { DarkTheme, LightTheme } from "../styles/colors";
 
 const TakeScreen = () => {
   const [addToList, setAddtoList] = useState<Array<Mind>>([]);
   const [totalAmount, setTotalAmount] = useState<number | null>(null);
 
+  const theme = useColorScheme() === "dark" ? DarkTheme : LightTheme;
   useEffect(() => {
     if (auth.currentUser && !auth.currentUser.isAnonymous) {
       try {
@@ -106,8 +116,12 @@ const TakeScreen = () => {
   };
 
   return addToList.length > 0 ? (
-    <View style={styles.cardContainer}>
-      <Text style={styles.cardElementPN}>
+    <View
+      style={[
+        styles.cardContainer,
+        { backgroundColor: theme.backGroundColor },
+      ]}>
+      <Text style={[styles.cardElementPN, { color: theme.textColor }]}>
         Total amount to be recieved: ₹{totalAmount}/-
       </Text>
       <ScrollView>
@@ -128,20 +142,29 @@ const TakeScreen = () => {
               style={[
                 styles.Card,
                 {
-                  backgroundColor: transaction.type === "take" ? "#defffd" : "",
+                  backgroundColor: theme.cardContainerColor.take,
                 },
               ]}>
-              <Text style={styles.cardElementA}>₹{transaction.amount}/-</Text>
-              <Text style={styles.cardElementT}>from</Text>
+              <Text style={[styles.cardElementA, { color: theme.button.text }]}>
+                ₹{transaction.amount}/-
+              </Text>
+              <Text style={[styles.cardElementT, { color: theme.button.text }]}>
+                from
+              </Text>
 
-              <Text style={styles.cardElementPN}>{transaction.personName}</Text>
+              <Text
+                style={[styles.cardElementPN, { color: theme.button.text }]}>
+                {transaction.personName}
+              </Text>
             </TouchableOpacity>
           );
         })}
       </ScrollView>
     </View>
   ) : (
-    <NoTransactions type={"take"} />
+    <View style={{ height: "100%" }}>
+      <NoTransactions type={"take"} />
+    </View>
   );
 };
 export default TakeScreen;

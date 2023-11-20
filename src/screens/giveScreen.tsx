@@ -1,4 +1,11 @@
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  useColorScheme,
+} from "react-native";
 
 import { styles } from "../styles/styles";
 import { useEffect, useState } from "react";
@@ -15,10 +22,14 @@ import { auth, mmCollection } from "../firebase/firebase";
 import NoTransactions from "../components/noTransactions";
 import { Mind } from "../types/types";
 import React from "react";
+import { DarkTheme, LightTheme } from "../styles/colors";
 
 const GiveScreen = () => {
   const [addToList, setAddtoList] = useState([]);
   const [totalAmount, setTotalAmount] = useState<number | null>(null);
+  const isDarkMode = useColorScheme() === "dark";
+
+  const theme = isDarkMode ? DarkTheme : LightTheme;
 
   useEffect(() => {
     if (auth.currentUser && !auth.currentUser.isAnonymous) {
@@ -107,8 +118,14 @@ const GiveScreen = () => {
     }
   };
   return addToList.length > 0 ? (
-    <View style={styles.cardContainer}>
-      <Text style={styles.cardElementPN}>
+    <View
+      style={[
+        styles.cardContainer,
+        {
+          backgroundColor: theme.backGroundColor,
+        },
+      ]}>
+      <Text style={[styles.cardElementPN, { color: theme.textColor }]}>
         Total amount to be transferred: ₹{totalAmount}/-
       </Text>
       <ScrollView>
@@ -129,13 +146,20 @@ const GiveScreen = () => {
               style={[
                 styles.Card,
                 {
-                  backgroundColor: transaction.type === "take" ? "" : "#ffaaad",
+                  backgroundColor: theme.cardContainerColor.give,
                 },
               ]}>
-              <Text style={styles.cardElementA}>₹{transaction.amount}/-</Text>
-              <Text style={styles.cardElementT}>to</Text>
+              <Text style={[styles.cardElementA, { color: theme.button.text }]}>
+                ₹{transaction.amount}/-
+              </Text>
+              <Text style={[styles.cardElementT, { color: theme.button.text }]}>
+                to
+              </Text>
 
-              <Text style={styles.cardElementPN}>{transaction.personName}</Text>
+              <Text
+                style={[styles.cardElementPN, { color: theme.button.text }]}>
+                {transaction.personName}
+              </Text>
             </TouchableOpacity>
           );
         })}

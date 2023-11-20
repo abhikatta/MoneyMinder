@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 
 export const styles = StyleSheet.create({
   // loginScreen:
@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     height: 60,
     borderRadius: 10,
     fontSize: 18,
-    color: "black",
     paddingHorizontal: 5,
     paddingVertical: 2,
     marginVertical: 5,
@@ -23,7 +22,6 @@ export const styles = StyleSheet.create({
   },
   loginGreeting: {
     fontSize: 22,
-    color: "teal",
 
     textAlign: "center",
     marginHorizontal: "2%",
@@ -44,22 +42,19 @@ export const styles = StyleSheet.create({
     marginVertical: 10,
     justifyContent: "center",
   },
-  loginButtonText: {
-    color: "#defaed",
-  },
+  loginButtonText: {},
   // ----------------
 
   container: {
     flex: 1,
     paddingVertical: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#black",
     alignItems: "center",
     justifyContent: "center",
   },
   helpBox: {
     width: "80%",
-    backgroundColor: "yellow",
-    color: "midnightblue",
+
     borderRadius: 10,
     alignSelf: "center",
     marginVertical: 2,
@@ -68,19 +63,18 @@ export const styles = StyleSheet.create({
   },
   homeTransactionInput: {
     height: 70,
+    width: "97%",
     fontSize: 22,
     textAlign: "center",
     paddingHorizontal: 5,
     paddingVertical: 5,
     borderRadius: 10,
-    backgroundColor: "cyan",
+    alignSelf: "center",
     fontWeight: "bold",
-    color: "black",
     marginVertical: 20,
   },
   helpExample: {
     backgroundColor: "gold",
-    color: "black",
     fontWeight: "bold",
     borderRadius: 10,
     textAlign: "center",
@@ -91,7 +85,7 @@ export const styles = StyleSheet.create({
   helpButton: {
     width: "20%",
     textAlign: "center",
-    backgroundColor: "yellow",
+
     marginVertical: 10,
     paddingVertical: 5,
     paddingHorizontal: 7,
@@ -100,30 +94,28 @@ export const styles = StyleSheet.create({
   Card: {
     borderRadius: 10,
     padding: 10,
-    width: "auto",
+    width: "90%",
+    alignSelf: "center",
     marginVertical: 5,
-
-    color: "teal",
   },
   cardElementA: {
-    color: "teal",
     fontSize: 30,
     textAlign: "center",
   },
   cardElementT: {
-    color: "teal",
     fontSize: 10,
 
     textAlign: "center",
   },
   cardElementPN: {
-    color: "teal",
     fontSize: 20,
     textAlign: "center",
   },
   cardContainer: {
-    width: "80%",
-    height: "95%",
+    width: "99%",
+    height: "100%",
+
+    borderRadius: 20,
     alignSelf: "center",
   },
   containerHolders: {
@@ -152,7 +144,6 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   profileButtonText: {
-    color: "white",
     fontWeight: "800",
   },
   // ------------
@@ -168,12 +159,10 @@ export const styles = StyleSheet.create({
     padding: 10,
     width: "50%",
     marginVertical: 5,
-    backgroundColor: "yellow",
-    color: "teal",
+
     alignSelf: "center",
   },
   homeButtonText: {
-    color: "teal",
     fontSize: 20,
     textAlign: "center",
   },
@@ -186,20 +175,16 @@ export const styles = StyleSheet.create({
   showTransactionDoneText: {
     textDecorationLine: "none",
     fontSize: 13,
-    color: "teal",
     textAlign: "left",
   },
   // noTransactions:
   noTransactions: {
-    opacity: 0.3,
     flex: 1,
-    width: "80%",
-    marginVertical: "20%",
+    width: "99%",
     alignSelf: "center",
     flexDirection: "column",
     justifyContent: "center",
-    borderRadius: 40,
-    borderWidth: 2,
+    borderRadius: 20,
   },
   noTransactionsText: {
     textAlign: "center",
@@ -210,7 +195,5 @@ export const styles = StyleSheet.create({
     padding: 10,
     width: "auto",
     marginVertical: 5,
-    backgroundColor: "#edfffe",
-    color: "teal",
   },
 });

@@ -1,4 +1,11 @@
-import { Alert, ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  useColorScheme,
+} from "react-native";
 import { styles } from "../styles/styles";
 import { useEffect, useState } from "react";
 import {
@@ -15,10 +22,13 @@ import { auth, mmCollection } from "../firebase/firebase";
 import NoTransactions from "../components/noTransactions";
 import { Mind } from "../types/types";
 import React from "react";
+import { DarkTheme, LightTheme } from "../styles/colors";
 
 const HistoryScreen = () => {
-  const [addToList, setAddtoList] = useState([]);
+  const [addToList, setAddtoList] = useState<Array<Mind>>([]);
 
+  const isDarkMode = useColorScheme() === "dark";
+  const theme = isDarkMode ? DarkTheme : LightTheme;
   useEffect(() => {
     if (auth.currentUser && !auth.currentUser.isAnonymous) {
       try {
@@ -80,7 +90,7 @@ const HistoryScreen = () => {
         );
         const transactions: Array<Mind> = querySnapshot.docs.map(
           (doc): Mind => {
-            const data = doc.data();
+            const data = doc.data() as Mind;
             return {
               id: data.id,
               doc_id: doc.id,
@@ -153,11 +163,23 @@ const HistoryScreen = () => {
   };
 
   return addToList.length > 0 ? (
-    <View style={styles.cardContainer}>
+    <View
+      style={[
+        styles.cardContainer,
+        { backgroundColor: theme.backGroundColor },
+      ]}>
       <TouchableOpacity
         onPress={handleDeleteAllTransactions}
-        style={[styles.Card, { backgroundColor: "#edfffe" }]}>
-        <Text style={styles.cardElementPN}>Delete all transactions</Text>
+        style={[styles.Card, { backgroundColor: theme.textColor }]}>
+        <Text
+          style={[
+            styles.cardElementPN,
+            {
+              color: theme.backGroundColor,
+            },
+          ]}>
+          Delete all transactions
+        </Text>
       </TouchableOpacity>
       <ScrollView>
         {addToList.map((transaction, index) => {
@@ -178,15 +200,39 @@ const HistoryScreen = () => {
                 styles.Card,
                 {
                   backgroundColor:
-                    transaction.type === "take" ? "#defffd" : "#ffaaad",
-                  opacity: 0.4,
+                    transaction.type === "give"
+                      ? theme.cardContainerColor.give
+                      : theme.cardContainerColor.take,
+                  opacity: 0.5,
                 },
               ]}>
-              <Text style={styles.cardElementA}>₹{transaction.amount}/-</Text>
-              <Text style={styles.cardElementT}>
+              <Text
+                style={[
+                  styles.cardElementA,
+                  {
+                    color: theme.button.text,
+                  },
+                ]}>
+                ₹{transaction.amount}/-
+              </Text>
+              <Text
+                style={[
+                  styles.cardElementT,
+                  {
+                    color: theme.button.text,
+                  },
+                ]}>
                 {transaction.type === "take" ? "from" : "to"}
               </Text>
-              <Text style={styles.cardElementPN}>{transaction.personName}</Text>
+              <Text
+                style={[
+                  styles.cardElementPN,
+                  {
+                    color: theme.button.text,
+                  },
+                ]}>
+                {transaction.personName}
+              </Text>
             </TouchableOpacity>
           );
         })}

@@ -11,22 +11,11 @@ import { auth } from "./src/firebase/firebase";
 import Tabs from "./src/navigation/Tabs";
 import ProfileScreen from "./src/screens/ProfileScreen";
 
-interface DarkTheme {
-  backgroundColor: string;
-  color: string;
-}
-
 const App = (): React.ReactElement => {
-  const isDarkMode = useColorScheme() === "dark";
-  const BottomTabNavigator = createBottomTabNavigator();
-  const backgroundStyle: DarkTheme = {
-    backgroundColor: isDarkMode ? "#22222d" : "#ddddaa",
-    color: isDarkMode ? "#ddddaa" : "#22222d",
-  };
-
-  const Stack = createNativeStackNavigator();
-
   const [userID, setUserID] = useState(null);
+
+  const BottomTabNavigator = createBottomTabNavigator();
+  const Stack = createNativeStackNavigator();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

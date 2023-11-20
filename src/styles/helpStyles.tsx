@@ -6,6 +6,7 @@ const helpStyles = StyleSheet.create({
     backgroundColor: "#fff",
     borderRadius: 8,
     marginBottom: 16,
+    marginHorizontal: 2,
   },
   helpTitle: {
     fontSize: 18,

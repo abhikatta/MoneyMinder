@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React = require("react");
-import { Image, View, TouchableOpacity } from "react-native";
+import { Image, View, TouchableOpacity, useColorScheme } from "react-native";
 
 import GiveScreen from "../screens/giveScreen";
 import TakeScreen from "../screens/takeScreen";
@@ -13,6 +13,7 @@ const Tabs = ({ navigation }: any) => {
     <BottomTabNavigator.Navigator>
       <BottomTabNavigator.Screen
         options={{
+          tabBarActiveTintColor: "teal",
           tabBarHideOnKeyboard: true,
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("PROFILE")}>
@@ -28,8 +29,7 @@ const Tabs = ({ navigation }: any) => {
             width: 45,
             bottom: "10%",
           },
-          // headerShown: false,
-          tabBarActiveTintColor: "teal",
+
           tabBarIcon: ({ focused }: any) => (
             <View>
               <Image
@@ -38,7 +38,7 @@ const Tabs = ({ navigation }: any) => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? "teal" : "black",
+                  tintColor: focused ? "teal" : "gray",
                 }}
               />
             </View>
@@ -74,7 +74,7 @@ const Tabs = ({ navigation }: any) => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? "teal" : "black",
+                  tintColor: focused ? "teal" : "gray",
                 }}
               />
             </View>
@@ -85,6 +85,8 @@ const Tabs = ({ navigation }: any) => {
       />
       <BottomTabNavigator.Screen
         options={{
+          tabBarActiveTintColor: "teal",
+
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("PROFILE")}>
               <Image
@@ -99,6 +101,7 @@ const Tabs = ({ navigation }: any) => {
             width: 45,
             bottom: "10%",
           },
+
           // headerShown: false,
           tabBarIcon: ({ focused }: any) => (
             <View>
@@ -108,18 +111,19 @@ const Tabs = ({ navigation }: any) => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? "teal" : "black",
+                  tintColor: focused ? "teal" : "gray",
                 }}
               />
             </View>
           ),
-          tabBarActiveTintColor: "teal",
         }}
         name="TAKE"
         component={TakeScreen}
       />
       <BottomTabNavigator.Screen
         options={{
+          tabBarActiveTintColor: "teal",
+
           headerRight: () => (
             <TouchableOpacity onPress={() => navigation.navigate("PROFILE")}>
               <Image
@@ -143,12 +147,11 @@ const Tabs = ({ navigation }: any) => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? "teal" : "black",
+                  tintColor: focused ? "teal" : "gray",
                 }}
               />
             </View>
           ),
-          tabBarActiveTintColor: "teal",
         }}
         name="HISTORY"
         component={HistoryScreen}
