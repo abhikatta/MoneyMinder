@@ -1,14 +1,22 @@
 import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+  useColorScheme,
+} from "react-native";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { styles } from "../styles/styles";
 import React from "react";
+import { DarkTheme, LightTheme } from "../styles/loginScreenColors";
 
 const Login = ({ login, loginAnonymously }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [securePassword, setSecurePassword] = useState<boolean>(true);
-
+  const isDarkMode = useColorScheme() === "dark";
+  const theme = isDarkMode ? DarkTheme : LightTheme;
   const handleShowPassword = () => {
     setSecurePassword((prevSecurePassword) => !prevSecurePassword);
   };
@@ -18,9 +26,14 @@ const Login = ({ login, loginAnonymously }) => {
     setPassword("");
     setSecurePassword(true);
   };
+
   return (
-    <View style={styles.loginContainer}>
-      <Text style={styles.loginGreeting}>
+    <View
+      style={[
+        styles.loginContainer,
+        { backgroundColor: theme.backGroundColor },
+      ]}>
+      <Text style={[styles.loginGreeting, { color: theme.textColor }]}>
         Hi there, enter your credentials to get started!
       </Text>
       <TextInput
@@ -30,7 +43,7 @@ const Login = ({ login, loginAnonymously }) => {
         placeholder="Email"
         onChangeText={(email) => setEmail(email)}
         autoComplete="email"
-        style={styles.loginInput}
+        style={[styles.loginInput]}
       />
       <TextInput
         value={password}

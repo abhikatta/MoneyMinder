@@ -1,9 +1,8 @@
-import { StyleSheet, useColorScheme } from "react-native";
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
   // loginScreen:
   loginInput: {
-    backgroundColor: "#defaed",
     width: "80%",
     height: 60,
     borderRadius: 10,
@@ -22,7 +21,6 @@ export const styles = StyleSheet.create({
   },
   loginGreeting: {
     fontSize: 22,
-
     textAlign: "center",
     marginHorizontal: "2%",
     justifyContent: "center",
